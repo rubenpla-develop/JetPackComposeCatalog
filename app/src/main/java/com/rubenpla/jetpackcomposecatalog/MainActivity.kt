@@ -13,6 +13,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -140,6 +141,10 @@ fun MyTexFieldOutlined() {
         value = myText,
         onValueChange = { myText = it },
         label = { Text(text = "Introduce tu nombre") },
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier.padding(16.dp),
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            focusedBorderColor = Color.Green,
+            unfocusedBorderColor = Color.DarkGray
+        )
     )
 }
