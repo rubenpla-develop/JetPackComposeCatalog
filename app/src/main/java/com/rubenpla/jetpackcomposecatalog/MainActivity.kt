@@ -41,6 +41,7 @@ class MainActivity : ComponentActivity() {
                     Column(Modifier.fillMaxSize()) {
                         MyText()
                         MyTextField()
+                        MyTextFieldAdvance()
                     }
                 }
             }
@@ -48,12 +49,23 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview(
+    name = "PREVIEW 1",
+    showBackground = true,
+    showSystemUi = true,
+    apiLevel = 33,
+    device = Devices.PIXEL_3A_XL
+)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun GreetingPreview() {
+    JetPackComposeCatalogTheme {
+        // Greeting("Android")
+        Column(Modifier.fillMaxSize()) {
+            MyText()
+            MyTextField()
+            MyTextFieldAdvance()
+        }
+    }
 }
 
 @Composable
@@ -94,20 +106,21 @@ fun MyTextField() {
 
 }
 
-@Preview(
-    name = "PREVIEW 1",
-    showBackground = true,
-    showSystemUi = true,
-    apiLevel = 33,
-    device = Devices.PIXEL_3A_XL
-)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GreetingPreview() {
-    JetPackComposeCatalogTheme {
-        // Greeting("Android")
-        Column(Modifier.fillMaxSize()) {
-            MyText()
-            MyTextField()
-        }
+fun MyTextFieldAdvance() {
+    var myText by remember {
+        mutableStateOf("")
     }
+
+    TextField(
+        value = myText,
+        onValueChange = {
+            myText =  if(it.contains("a")) {
+                it.replace("a", "")
+            } else {
+                it
+            }
+                        },
+        label = { Text("Introduce tu nombre") })
 }
