@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -41,11 +40,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    var myText by remember {
+                        mutableStateOf("Compose")
+                    }
                     Column(Modifier.fillMaxSize()) {
                         MyText()
                         MyTextField()
                         MyTextFieldAdvance()
-                        MyTexFieldOutlined()
+                        MyTexFieldOutlined(myText) { myText = it }
                     }
                 }
             }
@@ -64,11 +66,15 @@ class MainActivity : ComponentActivity() {
 fun GreetingPreview() {
     JetPackComposeCatalogTheme {
         // Greeting("Android")
+        var myText by remember {
+            mutableStateOf("Compose")
+        }
+
         Column(Modifier.fillMaxSize()) {
             MyText()
             MyTextField()
             MyTextFieldAdvance()
-            MyTexFieldOutlined()
+            MyTexFieldOutlined(myText) { myText = it }
         }
     }
 }
@@ -132,14 +138,12 @@ fun MyTextFieldAdvance() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTexFieldOutlined() {
-    var myText by remember {
-        mutableStateOf("")
-    }
+fun MyTexFieldOutlined(name: String, onValueChanged : (String) -> Unit) {
+
 
     OutlinedTextField(
-        value = myText,
-        onValueChange = { myText = it },
+        value = name,
+        onValueChange = { onValueChanged(it) },
         label = { Text(text = "Introduce tu nombre") },
         modifier = Modifier.padding(16.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
