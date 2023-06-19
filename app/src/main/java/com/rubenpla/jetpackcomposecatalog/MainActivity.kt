@@ -6,8 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -42,6 +44,7 @@ class MainActivity : ComponentActivity() {
                         MyText()
                         MyTextField()
                         MyTextFieldAdvance()
+                        MyTexFieldOutlined()
                     }
                 }
             }
@@ -64,6 +67,7 @@ fun GreetingPreview() {
             MyText()
             MyTextField()
             MyTextFieldAdvance()
+            MyTexFieldOutlined()
         }
     }
 }
@@ -116,11 +120,26 @@ fun MyTextFieldAdvance() {
     TextField(
         value = myText,
         onValueChange = {
-            myText =  if(it.contains("a")) {
+            myText = if (it.contains("a")) {
                 it.replace("a", "")
             } else {
                 it
             }
-                        },
+        },
         label = { Text("Introduce tu nombre") })
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MyTexFieldOutlined() {
+    var myText by remember {
+        mutableStateOf("")
+    }
+
+    OutlinedTextField(
+        value = myText,
+        onValueChange = { myText = it },
+        label = { Text(text = "Introduce tu nombre") },
+        modifier = Modifier.padding(16.dp)
+    )
 }
