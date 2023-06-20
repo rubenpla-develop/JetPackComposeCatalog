@@ -12,9 +12,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AccountBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -92,6 +95,7 @@ fun GreetingPreview() {
             //MyButtonExample()
             MyImage()
             MyImageAdvance()
+            MyIcon()
         }
     }
 }
@@ -115,6 +119,13 @@ fun MyImageAdvance() {
         painter = painterResource(id = R.drawable.ic_launcher_background),
         contentDescription = "Ejemplo",
         alpha = 0.7f
+    )
+}
+
+@Composable
+fun MyIcon() {
+    Icon(
+        imageVector = Icons.Rounded.AccountBox, contentDescription = "Icon", tint = Color.Red
     )
 }
 
