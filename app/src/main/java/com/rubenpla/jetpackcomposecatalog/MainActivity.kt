@@ -6,7 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -18,8 +20,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccountBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -28,12 +32,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -66,7 +72,11 @@ class MainActivity : ComponentActivity() {
                         MyTextField()
                         MyTextFieldAdvance()
                         MyTexFieldOutlined(myText) { myText = it }*/
-                        MyButtonExample()
+                        //MyButtonExample()
+                        //            MyImage()
+                        //            MyImageAdvance()
+                        //            MyIcon()
+                        MyProgressBar()
                     }
                 }
             }
@@ -95,10 +105,33 @@ fun GreetingPreview() {
             MyTextFieldAdvance()
             MyTexFieldOutlined(myText) { myText = it }*/
             //MyButtonExample()
-            MyImage()
-            MyImageAdvance()
-            MyIcon()
+//            MyImage()
+//            MyImageAdvance()
+//            MyIcon()
+            MyProgressBar()
         }
+    }
+}
+
+@Composable
+fun MyProgressBar() {
+    Column(
+        Modifier
+            .padding(24.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(
+            modifier = Modifier
+                .width(48.dp)
+                .height(48.dp),
+            color = Color.Red, strokeWidth = 3.dp,
+        )
+        LinearProgressIndicator(
+            modifier = Modifier.padding(top = 24.dp), color = Color.Red,
+            trackColor = Color.Green
+        )
     }
 }
 
@@ -126,7 +159,10 @@ fun MyImageAdvance() {
 
 @Composable
 fun MyIcon() {
-    Icon(modifier =  Modifier.width(96.dp).height(96.dp),
+    Icon(
+        modifier = Modifier
+            .width(96.dp)
+            .height(96.dp),
         imageVector = Icons.Rounded.AccountBox, contentDescription = "Icon", tint = Color.Red
     )
 }
