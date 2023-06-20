@@ -10,7 +10,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -53,6 +55,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rubenpla.jetpackcomposecatalog.ui.theme.JetPackComposeCatalogTheme
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +79,8 @@ class MainActivity : ComponentActivity() {
                         //            MyImage()
                         //            MyImageAdvance()
                         //            MyIcon()
-                        MyProgressBar()
+                        //MyProgressBar()
+                        MyProgressbarAdvanced()
                     }
                 }
             }
@@ -108,7 +112,8 @@ fun GreetingPreview() {
 //            MyImage()
 //            MyImageAdvance()
 //            MyIcon()
-            MyProgressBar()
+            //MyProgressBar()
+            MyProgressbarAdvanced()
         }
     }
 }
@@ -152,6 +157,39 @@ fun MyProgressBar() {
                 }
             }) {
             Text(text = "$textButtonState Progress Bar")
+        }
+    }
+}
+
+@Composable
+fun MyProgressbarAdvanced() {
+
+    var percentage by rememberSaveable() {
+        mutableStateOf(0.5f)
+    }
+
+    Column(modifier = Modifier.fillMaxSize(),
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(modifier = Modifier
+            .width(96.dp)
+            .height(96.dp),
+            progress = percentage)
+
+        Text(modifier = Modifier.padding(top = 16.dp), text = "Loading Complete at ${percentage*100}%")
+
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(25.dp)
+            .background(Color.LightGray), horizontalArrangement = Arrangement.SpaceAround) {
+            Button(modifier = Modifier.width(125.dp), onClick = { percentage += 0.1f }) {
+                Text(text = "+ 10%")
+            }
+
+            Button(modifier = Modifier.width(125.dp), onClick = { percentage -= 0.1f }) {
+                Text(text = " -10%")
+            }
         }
     }
 }
