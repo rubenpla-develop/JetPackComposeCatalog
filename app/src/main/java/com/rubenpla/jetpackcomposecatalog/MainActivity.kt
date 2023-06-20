@@ -1,11 +1,16 @@
 package com.rubenpla.jetpackcomposecatalog
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -18,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -44,10 +50,11 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf("Compose")
                     }
                     Column(Modifier.fillMaxSize()) {
-                        MyText()
+/*                        MyText()
                         MyTextField()
                         MyTextFieldAdvance()
-                        MyTexFieldOutlined(myText) { myText = it }
+                        MyTexFieldOutlined(myText) { myText = it }*/
+                        MyButtonExample()
                     }
                 }
             }
@@ -71,10 +78,35 @@ fun GreetingPreview() {
         }
 
         Column(Modifier.fillMaxSize()) {
-            MyText()
+/*            MyText()
             MyTextField()
             MyTextFieldAdvance()
-            MyTexFieldOutlined(myText) { myText = it }
+            MyTexFieldOutlined(myText) { myText = it }*/
+            MyButtonExample()
+        }
+    }
+}
+
+@Composable
+fun MyButtonExample() {
+    var enabled by rememberSaveable { mutableStateOf(true) }
+
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(24.dp)
+    ) {
+        Button(
+            onClick = { Log.i("Udemy", "Button clicked!!")
+                      enabled = false},
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Blue,
+                contentColor = Color.White
+            ),
+            border = BorderStroke(5.dp,Color.DarkGray),
+            enabled = enabled
+        ) {
+            Text(text = "Pulsar")
         }
     }
 }
@@ -138,7 +170,7 @@ fun MyTextFieldAdvance() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTexFieldOutlined(name: String, onValueChanged : (String) -> Unit) {
+fun MyTexFieldOutlined(name: String, onValueChanged: (String) -> Unit) {
 
 
     OutlinedTextField(
