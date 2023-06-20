@@ -115,6 +115,10 @@ fun GreetingPreview() {
 
 @Composable
 fun MyProgressBar() {
+    var showLoading by rememberSaveable() {
+        mutableStateOf(false)
+    }
+
     Column(
         Modifier
             .padding(24.dp)
@@ -122,16 +126,33 @@ fun MyProgressBar() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        CircularProgressIndicator(
-            modifier = Modifier
-                .width(48.dp)
-                .height(48.dp),
-            color = Color.Red, strokeWidth = 3.dp,
-        )
-        LinearProgressIndicator(
-            modifier = Modifier.padding(top = 24.dp), color = Color.Red,
-            trackColor = Color.Green
-        )
+        if (showLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .width(48.dp)
+                    .height(48.dp),
+                color = Color.Red, strokeWidth = 3.dp,
+            )
+            LinearProgressIndicator(
+                modifier = Modifier.padding(top = 24.dp), color = Color.Red,
+                trackColor = Color.Green
+            )
+        }
+
+        var textButtonState: String? by rememberSaveable() {
+            mutableStateOf("Show")
+        }
+        Button(modifier = Modifier.padding(top = 24.dp),
+            onClick = {
+                showLoading = !showLoading
+
+                textButtonState = when (showLoading) {
+                    true -> "Hide"
+                    false -> "Show"
+                }
+            }) {
+            Text(text = "$textButtonState Progress Bar")
+        }
     }
 }
 
