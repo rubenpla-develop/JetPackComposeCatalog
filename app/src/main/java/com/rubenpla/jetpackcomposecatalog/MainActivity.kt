@@ -17,6 +17,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -109,7 +110,7 @@ fun MyButtonExample() {
             border = BorderStroke(5.dp, Color.DarkGray),
             enabled = enabled
         ) {
-            Text(text = "Pulsar")
+            Text(text = "Standard Button")
         }
 
         OutlinedButton(
@@ -124,7 +125,17 @@ fun MyButtonExample() {
             // border = BorderStroke(2.dp,Color.DarkGray),
             enabled = enabled
         ) {
-            Text(text = "Pulsar")
+            Text(text = "Outlined Button")
+        }
+
+        TextButton(
+            onClick = {
+                Log.i("Udemy", "Button clicked!!")
+                enabled = false
+            },
+            enabled = enabled
+        ) {
+            Text(text = "TextButton")
         }
     }
 }
