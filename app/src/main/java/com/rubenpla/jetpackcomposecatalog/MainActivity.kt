@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -28,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -84,9 +86,19 @@ fun GreetingPreview() {
             MyTextField()
             MyTextFieldAdvance()
             MyTexFieldOutlined(myText) { myText = it }*/
-            MyButtonExample()
+            //MyButtonExample()
+            MyImage()
         }
     }
+}
+
+@Composable
+fun MyImage() {
+    Image(
+        painter = painterResource(id = R.drawable.ic_launcher_background),
+        contentDescription = "Ejemplo",
+        alpha = 0.7f
+    )
 }
 
 @Composable
