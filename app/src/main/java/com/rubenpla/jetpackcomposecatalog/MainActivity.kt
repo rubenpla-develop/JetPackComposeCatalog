@@ -2,14 +2,16 @@ package com.rubenpla.jetpackcomposecatalog
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -88,6 +91,7 @@ fun GreetingPreview() {
             MyTexFieldOutlined(myText) { myText = it }*/
             //MyButtonExample()
             MyImage()
+            MyImageAdvance()
         }
     }
 }
@@ -95,6 +99,19 @@ fun GreetingPreview() {
 @Composable
 fun MyImage() {
     Image(
+        painter = painterResource(id = R.drawable.ic_launcher_background),
+        contentDescription = "Ejemplo",
+        alpha = 0.7f
+    )
+}
+
+@Composable
+fun MyImageAdvance() {
+    Image(
+        modifier = Modifier
+            .padding(top = 16.dp)
+            .clip(/*RoundedCornerShape(28.dp)*/CircleShape)
+            .border(3.dp, Color.DarkGray, CircleShape),
         painter = painterResource(id = R.drawable.ic_launcher_background),
         contentDescription = "Ejemplo",
         alpha = 0.7f
