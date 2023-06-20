@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -97,13 +98,30 @@ fun MyButtonExample() {
             .padding(24.dp)
     ) {
         Button(
-            onClick = { Log.i("Udemy", "Button clicked!!")
-                      enabled = false},
+            onClick = {
+                Log.i("Udemy", "Button clicked!!")
+                enabled = false
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Blue,
                 contentColor = Color.White
             ),
-            border = BorderStroke(5.dp,Color.DarkGray),
+            border = BorderStroke(5.dp, Color.DarkGray),
+            enabled = enabled
+        ) {
+            Text(text = "Pulsar")
+        }
+
+        OutlinedButton(
+            onClick = {
+                Log.i("Udemy", "Button clicked!!")
+                enabled = false
+            }, Modifier.padding(top = 8.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.LightGray,
+                contentColor = Color.DarkGray
+            ),
+            // border = BorderStroke(2.dp,Color.DarkGray),
             enabled = enabled
         ) {
             Text(text = "Pulsar")
