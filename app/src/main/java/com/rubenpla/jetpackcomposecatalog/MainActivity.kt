@@ -21,6 +21,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccountBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -114,9 +116,33 @@ fun GreetingPreview() {
 //            MyIcon()
             //MyProgressBar()
             //MyProgressbarAdvanced()
-            mySwitch()
+            //mySwitch()
+            myCheckBox()
         }
     }
+}
+
+@Composable
+fun myCheckBox() {
+    var state by rememberSaveable {
+        mutableStateOf(true)
+    }
+
+    Checkbox(modifier = Modifier
+        .padding(top = 16.dp, start = 16.dp)
+        .width(48.dp)
+        .height(48.dp),
+        checked = state, onCheckedChange = {
+            state = !state
+        },
+        enabled = true,
+        colors = CheckboxDefaults.colors(
+            uncheckedColor = Color.Red,
+            checkedColor = Color.Green,
+            disabledUncheckedColor = Color.DarkGray,
+            disabledCheckedColor = Color.LightGray,
+            checkmarkColor = Color.Blue
+        ))
 }
 
 @Composable
@@ -125,7 +151,10 @@ fun mySwitch() {
         mutableStateOf(true)
     }
 
-    Switch(modifier = Modifier.padding(top = 16.dp, start = 16.dp).width(48.dp).height(48.dp),
+    Switch(modifier = Modifier
+        .padding(top = 16.dp, start = 16.dp)
+        .width(48.dp)
+        .height(48.dp),
         checked = state, onCheckedChange = {
             state = !state
         },
