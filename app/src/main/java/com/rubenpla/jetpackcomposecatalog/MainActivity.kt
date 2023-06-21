@@ -57,6 +57,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rubenpla.jetpackcomposecatalog.model.CheckInfo
 import com.rubenpla.jetpackcomposecatalog.ui.theme.JetPackComposeCatalogTheme
 
 class MainActivity : ComponentActivity() {
@@ -69,9 +70,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var myText by remember {
-                        mutableStateOf("Compose")
+/*                    var status by rememberSaveable() {
+                        mutableStateOf(false)
                     }
+
+                    val checkInfo = CheckInfo(title = "Checkbox title 1",
+                        selected = status,
+                        onCheckedChange = { status = it })*/
+                    
+                    val myOptions = getOptions(titles = listOf("CheckBox 1",
+                            "Checkbox 2",
+                            "CheckBox 3",
+                            "CheckBox 4"))
+
                     Column(Modifier.fillMaxSize()) {
 /*                        MyText()
                         MyTextField()
@@ -85,7 +96,11 @@ class MainActivity : ComponentActivity() {
                         //MyProgressbarAdvanced()
                         //mySwitch()
                         //myCheckBox()
-                        myCheckBoxWithText()
+                        //myCheckBoxWithText()
+                        //myCheckBoxWithTextCompleted(checkboxInfo = checkInfo)
+                        myOptions.forEach {
+                            myCheckBoxWithTextCompleted(checkboxInfo = it)
+                        }
                     }
                 }
             }
@@ -104,9 +119,13 @@ class MainActivity : ComponentActivity() {
 fun GreetingPreview() {
     JetPackComposeCatalogTheme {
         // Greeting("Android")
-        var myText by remember {
-            mutableStateOf("Compose")
+        var status by rememberSaveable() {
+            mutableStateOf(false)
         }
+
+        val checkInfo = CheckInfo(title = "Checkbox title 1",
+            selected = true,
+            onCheckedChange = { status = it })
 
         Column(Modifier.fillMaxSize()) {
 /*            MyText()
@@ -121,8 +140,37 @@ fun GreetingPreview() {
             //MyProgressbarAdvanced()
             //mySwitch()
             //myCheckBox()
-            myCheckBoxWithText()
+            //myCheckBoxWithText()
+            myCheckBoxWithTextCompleted(checkboxInfo = checkInfo)
         }
+    }
+}
+
+@Composable
+fun myCheckBoxWithTextCompleted(checkboxInfo: CheckInfo) {
+
+    Row(Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+        Checkbox(checked = checkboxInfo.selected,
+            onCheckedChange = {
+                checkboxInfo.onCheckedChange(!checkboxInfo.selected)
+            })
+
+        Spacer(modifier = Modifier.width(3.dp))
+        Text(text = checkboxInfo.title)
+    }
+
+}
+
+@Composable
+fun getOptions(titles : List<String>) : List<CheckInfo> {
+    return titles.map {
+        var status by rememberSaveable() {
+            mutableStateOf(false)
+        }
+
+        CheckInfo(title = it,
+            selected = status,
+            onCheckedChange = { myNewStatus -> status = myNewStatus })
     }
 }
 
