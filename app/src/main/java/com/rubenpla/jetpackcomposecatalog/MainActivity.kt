@@ -31,6 +31,9 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonColors
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -100,10 +103,13 @@ class MainActivity : ComponentActivity() {
                         //myCheckBox()
                         //myCheckBoxWithText()
                         //myCheckBoxWithTextCompleted(checkboxInfo = checkInfo)
+
                         myTriStatusCheckBox()
                         myOptions.forEach {
                             myCheckBoxWithTextCompleted(checkboxInfo = it)
                         }
+
+                        myRadioButton()
                     }
                 }
             }
@@ -147,6 +153,29 @@ fun GreetingPreview() {
             myCheckBoxWithTextCompleted(checkboxInfo = checkInfo)
         }
     }
+}
+
+@Composable
+fun myRadioButton() {
+    var state by rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    Row(modifier = Modifier.padding(top = 20.dp), verticalAlignment = Alignment.CenterVertically) {
+        RadioButton(selected = state,
+            enabled = true,
+            onClick = { state = !state  }
+            , colors = RadioButtonDefaults.colors(
+                selectedColor = Color.Red,
+                unselectedColor = Color.Green,
+                disabledSelectedColor = Color.DarkGray,
+                disabledUnselectedColor = Color.LightGray)
+        )
+
+        Text(text = "RadioButton Text")
+
+    }
+
 }
 
 @Composable
