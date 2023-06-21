@@ -32,7 +32,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.RadioButtonColors
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
@@ -63,6 +62,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rubenpla.jetpackcomposecatalog.model.CheckInfo
+import com.rubenpla.jetpackcomposecatalog.model.RadioButtonInfo
 import com.rubenpla.jetpackcomposecatalog.ui.theme.JetPackComposeCatalogTheme
 
 class MainActivity : ComponentActivity() {
@@ -82,8 +82,12 @@ class MainActivity : ComponentActivity() {
                     val checkInfo = CheckInfo(title = "Checkbox title 1",
                         selected = status,
                         onCheckedChange = { status = it })*/
+
+                    var selected by rememberSaveable {
+                        mutableStateOf("Radio Button 1")
+                    }
                     
-                    val myOptions = getOptions(titles = listOf("CheckBox 1",
+                    val myCheckBoxOptions = getCheckBoxOptions(titles = listOf("CheckBox 1",
                             "Checkbox 2",
                             "CheckBox 3",
                             "CheckBox 4"))
@@ -105,11 +109,11 @@ class MainActivity : ComponentActivity() {
                         //myCheckBoxWithTextCompleted(checkboxInfo = checkInfo)
 
                         myTriStatusCheckBox()
-                        myOptions.forEach {
+                        myCheckBoxOptions.forEach {
                             myCheckBoxWithTextCompleted(checkboxInfo = it)
                         }
 
-                        myRadioButton()
+                        myRadioButtonList(name = selected, onItemSelected = { selected = it} )
                     }
                 }
             }
@@ -175,6 +179,54 @@ fun myRadioButton() {
         Text(text = "RadioButton Text")
 
     }
+}
+
+@Composable
+fun myRadioButtonList(name : String, onItemSelected: (String) -> Unit) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Row(modifier = Modifier.padding(top = 20.dp), verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(selected = name == "RadioButton 1",
+                enabled = true,
+                onClick = { onItemSelected("RadioButton 1") }
+                , colors = RadioButtonDefaults.colors(
+                    selectedColor = Color.Red,
+                    unselectedColor = Color.Green,
+                    disabledSelectedColor = Color.DarkGray,
+                    disabledUnselectedColor = Color.LightGray)
+            )
+
+            Text(text = "RadioButton 1")
+
+        }
+        Row(modifier = Modifier.padding(top = 20.dp), verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(selected = name == "RadioButton 2",
+                enabled = true,
+                onClick = { onItemSelected("RadioButton 2") }
+                , colors = RadioButtonDefaults.colors(
+                    selectedColor = Color.Red,
+                    unselectedColor = Color.Green,
+                    disabledSelectedColor = Color.DarkGray,
+                    disabledUnselectedColor = Color.LightGray)
+            )
+
+            Text(text = "RadioButton 2")
+
+        }
+        Row(modifier = Modifier.padding(top = 20.dp), verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(selected = name == "RadioButton 3",
+                enabled = true,
+                onClick = { onItemSelected("RadioButton 3") }
+                , colors = RadioButtonDefaults.colors(
+                    selectedColor = Color.Red,
+                    unselectedColor = Color.Green,
+                    disabledSelectedColor = Color.DarkGray,
+                    disabledUnselectedColor = Color.LightGray)
+            )
+
+            Text(text = "RadioButton 3")
+
+        }
+    }
 
 }
 
@@ -209,7 +261,7 @@ fun myCheckBoxWithTextCompleted(checkboxInfo: CheckInfo) {
 }
 
 @Composable
-fun getOptions(titles : List<String>) : List<CheckInfo> {
+fun getCheckBoxOptions(titles : List<String>) : List<CheckInfo> {
     return titles.map {
         var status by rememberSaveable() {
             mutableStateOf(false)
