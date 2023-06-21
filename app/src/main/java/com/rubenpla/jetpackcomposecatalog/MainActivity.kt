@@ -11,6 +11,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -82,7 +83,9 @@ class MainActivity : ComponentActivity() {
                         //            MyIcon()
                         //MyProgressBar()
                         //MyProgressbarAdvanced()
-                        mySwitch()
+                        //mySwitch()
+                        //myCheckBox()
+                        myCheckBoxWithText()
                     }
                 }
             }
@@ -117,9 +120,28 @@ fun GreetingPreview() {
             //MyProgressBar()
             //MyProgressbarAdvanced()
             //mySwitch()
-            myCheckBox()
+            //myCheckBox()
+            myCheckBoxWithText()
         }
     }
+}
+
+@Composable
+fun myCheckBoxWithText() {
+    var state by rememberSaveable {
+        mutableStateOf(true)
+    }
+
+    Row(Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+        Checkbox(
+            checked = state, onCheckedChange = {
+                state = !state
+            })
+
+        Spacer(modifier = Modifier.width(3.dp))
+        Text(text = "Checkbox Text")
+    }
+
 }
 
 @Composable
@@ -128,10 +150,11 @@ fun myCheckBox() {
         mutableStateOf(true)
     }
 
-    Checkbox(modifier = Modifier
-        .padding(top = 16.dp, start = 16.dp)
-        .width(48.dp)
-        .height(48.dp),
+    Checkbox(
+        modifier = Modifier
+            .padding(top = 16.dp, start = 16.dp)
+            .width(48.dp)
+            .height(48.dp),
         checked = state, onCheckedChange = {
             state = !state
         },
@@ -142,7 +165,8 @@ fun myCheckBox() {
             disabledUncheckedColor = Color.DarkGray,
             disabledCheckedColor = Color.LightGray,
             checkmarkColor = Color.Blue
-        ))
+        )
+    )
 }
 
 @Composable
@@ -151,10 +175,11 @@ fun mySwitch() {
         mutableStateOf(true)
     }
 
-    Switch(modifier = Modifier
-        .padding(top = 16.dp, start = 16.dp)
-        .width(48.dp)
-        .height(48.dp),
+    Switch(
+        modifier = Modifier
+            .padding(top = 16.dp, start = 16.dp)
+            .width(48.dp)
+            .height(48.dp),
         checked = state, onCheckedChange = {
             state = !state
         },
