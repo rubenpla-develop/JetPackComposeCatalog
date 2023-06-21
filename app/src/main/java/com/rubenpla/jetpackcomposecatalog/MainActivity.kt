@@ -38,6 +38,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -49,6 +50,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -98,6 +100,7 @@ class MainActivity : ComponentActivity() {
                         //myCheckBox()
                         //myCheckBoxWithText()
                         //myCheckBoxWithTextCompleted(checkboxInfo = checkInfo)
+                        myTriStatusCheckBox()
                         myOptions.forEach {
                             myCheckBoxWithTextCompleted(checkboxInfo = it)
                         }
@@ -144,6 +147,21 @@ fun GreetingPreview() {
             myCheckBoxWithTextCompleted(checkboxInfo = checkInfo)
         }
     }
+}
+
+@Composable
+fun myTriStatusCheckBox() {
+    var state by rememberSaveable {
+        mutableStateOf(ToggleableState.Off)
+    }
+
+        TriStateCheckbox(state = state, onClick = {
+            state= when (state) {
+                ToggleableState.On -> ToggleableState.Off
+                ToggleableState.Off -> ToggleableState.Indeterminate
+                ToggleableState.Indeterminate -> ToggleableState.On
+            }
+        })
 }
 
 @Composable
