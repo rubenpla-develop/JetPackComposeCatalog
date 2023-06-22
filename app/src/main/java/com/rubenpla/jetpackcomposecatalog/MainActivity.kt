@@ -142,6 +142,8 @@ class MainActivity : ComponentActivity() {
                         myDivider()
                         myBadgeBox()
                         myDropDownMenu()
+                        myBasicSlider()
+                        myAdvanceSlider()
                     }
                 }
             }
@@ -173,6 +175,8 @@ fun GreetingPreview() {
             myDivider()
             myBadgeBox()
             myDropDownMenu()
+            myBasicSlider()
+            myAdvanceSlider()
         }
     }
 }
