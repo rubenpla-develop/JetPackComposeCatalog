@@ -1,5 +1,6 @@
 package com.rubenpla.jetpackcomposecatalog
 
+import android.graphics.drawable.ShapeDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -18,8 +19,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.rounded.AccountBox
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgeDefaults
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -28,6 +36,7 @@ import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -36,6 +45,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -55,6 +65,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
@@ -125,6 +136,8 @@ class MainActivity : ComponentActivity() {
                          myRadioButtonList(name = selected, onItemSelected = { selected = it} )*/
 
                         myCard()
+                        myDivider()
+                        myBadgeBox()
                     }
                 }
             }
@@ -153,8 +166,42 @@ fun GreetingPreview() {
 
         Column(Modifier.fillMaxSize()) {
             myCard()
+            myDivider()
+            myBadgeBox()
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun myBadgeBox() {
+    BadgedBox(modifier = Modifier.padding(32.dp),
+        badge = {
+            Text(
+                text = "39",
+                modifier = Modifier
+                    .background(
+                        shape = ShapeDefaults.Medium,
+                        color = Color.Red
+                    )
+                    .padding(2.dp),
+                style = TextStyle(color = Color.White)
+            )
+        },
+        content = {
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = "badge Box",
+                tint = Color.Red
+            )
+        })
+}
+
+@Composable
+fun myDivider() {
+    Divider(modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp),
+        thickness = 3.dp,
+        color = Color.DarkGray)
 }
 
 @Composable
@@ -200,7 +247,8 @@ fun myRadioButton() {
     }
 
     Row(modifier = Modifier.padding(top = 20.dp), verticalAlignment = Alignment.CenterVertically) {
-        RadioButton(selected = state,
+        RadioButton(
+            selected = state,
             enabled = true,
             onClick = { state = !state }, colors = RadioButtonDefaults.colors(
                 selectedColor = Color.Red,
@@ -222,7 +270,8 @@ fun myRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
             modifier = Modifier.padding(top = 20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            RadioButton(selected = name == "RadioButton 1",
+            RadioButton(
+                selected = name == "RadioButton 1",
                 enabled = true,
                 onClick = { onItemSelected("RadioButton 1") }, colors = RadioButtonDefaults.colors(
                     selectedColor = Color.Red,
@@ -239,7 +288,8 @@ fun myRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
             modifier = Modifier.padding(top = 20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            RadioButton(selected = name == "RadioButton 2",
+            RadioButton(
+                selected = name == "RadioButton 2",
                 enabled = true,
                 onClick = { onItemSelected("RadioButton 2") }, colors = RadioButtonDefaults.colors(
                     selectedColor = Color.Red,
@@ -256,7 +306,8 @@ fun myRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
             modifier = Modifier.padding(top = 20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            RadioButton(selected = name == "RadioButton 3",
+            RadioButton(
+                selected = name == "RadioButton 3",
                 enabled = true,
                 onClick = { onItemSelected("RadioButton 3") }, colors = RadioButtonDefaults.colors(
                     selectedColor = Color.Red,
