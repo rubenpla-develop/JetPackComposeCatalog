@@ -3,6 +3,7 @@ package com.rubenpla.jetpackcomposecatalog
 import android.graphics.drawable.ShapeDrawable
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -11,6 +12,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -59,6 +61,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -116,35 +119,39 @@ class MainActivity : ComponentActivity() {
                     )
 
                     Column(Modifier.fillMaxSize()) {
-/*                        MyText()
-                        MyTextField()
-                        MyTextFieldAdvance()
-                        MyTexFieldOutlined(myText) { myText = it }*/
-                        //MyButtonExample()
-                        //            MyImage()
-                        //            MyImageAdvance()
-                        //            MyIcon()
-                        //MyProgressBar()
-                        //MyProgressbarAdvanced()
-                        //mySwitch()
-                        //myCheckBox()
-                        //myCheckBoxWithText()
-                        //myCheckBoxWithTextCompleted(checkboxInfo = checkInfo)
+                        /*Column(Modifier.fillMaxSize()) {
+                            myCard()
+                            myDivider()
+                            myBadgeBox()
+                            myDropDownMenu()
+                            myBasicSlider()
+                            myAdvanceSlider()
+                            myRangeSlider()
+                        }*/
 
-                        /* myTriStatusCheckBox()
-                         myCheckBoxOptions.forEach {
-                             myCheckBoxWithTextCompleted(checkboxInfo = it)
-                         }
+                        var show by remember {
+                            mutableStateOf(false)
+                        }
+                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                            Button(onClick = { show = true }) {
+                                Text(text = "Show Dialog")
+                            }
 
-                         myRadioButtonList(name = selected, onItemSelected = { selected = it} )*/
-
-                        myCard()
-                        myDivider()
-                        myBadgeBox()
-                        myDropDownMenu()
-                        myBasicSlider()
-                        myAdvanceSlider()
-                        myRangeSlider()
+                            myBasicDialog(context = this@MainActivity,
+                                showDialog = show, onDismiss = {
+                                    show = false
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        "Dialog dismiss pressed!!", Toast.LENGTH_SHORT
+                                    ).show()
+                                }, {
+                                    show = false
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        "Dialog config OK!!!", Toast.LENGTH_SHORT
+                                    ).show()
+                                })
+                        }
                     }
                 }
             }
@@ -171,14 +178,21 @@ fun GreetingPreview() {
             selected = true,
             onCheckedChange = { status = it })
 
+
         Column(Modifier.fillMaxSize()) {
-            myCard()
-            myDivider()
-            myBadgeBox()
-            myDropDownMenu()
-            myBasicSlider()
-            myAdvanceSlider()
-            myRangeSlider()
+            /*Column(Modifier.fillMaxSize()) {
+                myCard()
+                myDivider()
+                myBadgeBox()
+                myDropDownMenu()
+                myBasicSlider()
+                myAdvanceSlider()
+                myRangeSlider()
+            }*/
+
+            Column(Modifier.fillMaxSize()) {
+               // myBasicDialog(context = this@MainActivity)
+            }
         }
     }
 }
