@@ -9,6 +9,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,6 +38,8 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -138,6 +141,7 @@ class MainActivity : ComponentActivity() {
                         myCard()
                         myDivider()
                         myBadgeBox()
+                        myDropDownMenu()
                     }
                 }
             }
@@ -168,6 +172,7 @@ fun GreetingPreview() {
             myCard()
             myDivider()
             myBadgeBox()
+            myDropDownMenu()
         }
     }
 }
@@ -199,9 +204,45 @@ fun myBadgeBox() {
 
 @Composable
 fun myDivider() {
-    Divider(modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp),
+    Divider(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp),
         thickness = 3.dp,
-        color = Color.DarkGray)
+        color = Color.DarkGray
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun myDropDownMenu() {
+    var selectedOption by rememberSaveable() {
+        mutableStateOf("")
+    }
+
+    var expanded by remember {
+        mutableStateOf(false)
+    }
+
+    val desserts = listOf("Ice cream", "Coulant Chocolate", "Coffee", "Fruit", "Ice Milk")
+
+    Column(modifier = Modifier.padding(20.dp)) {
+        OutlinedTextField(value = selectedOption, onValueChange = { selectedOption = it },
+            enabled = false,
+            readOnly = true,
+            modifier = Modifier
+                .clickable { expanded = true }
+                .fillMaxWidth())
+    }
+
+    DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        desserts.forEach {dessert ->
+            DropdownMenuItem(text = { Text(text = dessert) }, onClick = {
+                expanded = false
+                selectedOption = dessert
+            })
+        }
+    }
 }
 
 @Composable
