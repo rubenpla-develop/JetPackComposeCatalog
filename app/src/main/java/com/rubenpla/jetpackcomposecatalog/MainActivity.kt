@@ -144,6 +144,7 @@ class MainActivity : ComponentActivity() {
                         myDropDownMenu()
                         myBasicSlider()
                         myAdvanceSlider()
+                        myRangeSlider()
                     }
                 }
             }
@@ -177,6 +178,7 @@ fun GreetingPreview() {
             myDropDownMenu()
             myBasicSlider()
             myAdvanceSlider()
+            myRangeSlider()
         }
     }
 }
