@@ -22,6 +22,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccountBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -41,6 +44,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TriStateCheckbox
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -55,6 +59,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Devices
@@ -86,11 +91,15 @@ class MainActivity : ComponentActivity() {
                     var selected by rememberSaveable {
                         mutableStateOf("Radio Button 1")
                     }
-                    
-                    val myCheckBoxOptions = getCheckBoxOptions(titles = listOf("CheckBox 1",
+
+                    val myCheckBoxOptions = getCheckBoxOptions(
+                        titles = listOf(
+                            "CheckBox 1",
                             "Checkbox 2",
                             "CheckBox 3",
-                            "CheckBox 4"))
+                            "CheckBox 4"
+                        )
+                    )
 
                     Column(Modifier.fillMaxSize()) {
 /*                        MyText()
@@ -108,12 +117,14 @@ class MainActivity : ComponentActivity() {
                         //myCheckBoxWithText()
                         //myCheckBoxWithTextCompleted(checkboxInfo = checkInfo)
 
-                        myTriStatusCheckBox()
-                        myCheckBoxOptions.forEach {
-                            myCheckBoxWithTextCompleted(checkboxInfo = it)
-                        }
+                        /* myTriStatusCheckBox()
+                         myCheckBoxOptions.forEach {
+                             myCheckBoxWithTextCompleted(checkboxInfo = it)
+                         }
 
-                        myRadioButtonList(name = selected, onItemSelected = { selected = it} )
+                         myRadioButtonList(name = selected, onItemSelected = { selected = it} )*/
+
+                        myCard()
                     }
                 }
             }
@@ -141,20 +152,43 @@ fun GreetingPreview() {
             onCheckedChange = { status = it })
 
         Column(Modifier.fillMaxSize()) {
-/*            MyText()
-            MyTextField()
-            MyTextFieldAdvance()
-            MyTexFieldOutlined(myText) { myText = it }*/
-            //MyButtonExample()
-//            MyImage()
-//            MyImageAdvance()
-//            MyIcon()
-            //MyProgressBar()
-            //MyProgressbarAdvanced()
-            //mySwitch()
-            //myCheckBox()
-            //myCheckBoxWithText()
-            myCheckBoxWithTextCompleted(checkboxInfo = checkInfo)
+            myCard()
+        }
+    }
+}
+
+@Composable
+fun myCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 48.dp, pressedElevation = 16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.LightGray),
+        border = BorderStroke(1.dp, Color.DarkGray), shape = MaterialTheme.shapes.small
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(32.dp)
+        ) {
+            Text(
+                text = "Text 1",
+                color = Color.White,
+                style = TextStyle(fontStyle = FontStyle.Italic),
+                fontSize = 23.sp
+            )
+            Text(
+                text = "Text 2",
+                color = Color.White,
+                style = TextStyle(fontStyle = FontStyle.Italic),
+                fontSize = 23.sp
+            )
+            Text(
+                text = "Text 3",
+                color = Color.White,
+                style = TextStyle(fontStyle = FontStyle.Italic),
+                fontSize = 23.sp
+            )
         }
     }
 }
@@ -168,12 +202,12 @@ fun myRadioButton() {
     Row(modifier = Modifier.padding(top = 20.dp), verticalAlignment = Alignment.CenterVertically) {
         RadioButton(selected = state,
             enabled = true,
-            onClick = { state = !state  }
-            , colors = RadioButtonDefaults.colors(
+            onClick = { state = !state }, colors = RadioButtonDefaults.colors(
                 selectedColor = Color.Red,
                 unselectedColor = Color.Green,
                 disabledSelectedColor = Color.DarkGray,
-                disabledUnselectedColor = Color.LightGray)
+                disabledUnselectedColor = Color.LightGray
+            )
         )
 
         Text(text = "RadioButton Text")
@@ -182,45 +216,54 @@ fun myRadioButton() {
 }
 
 @Composable
-fun myRadioButtonList(name : String, onItemSelected: (String) -> Unit) {
+fun myRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        Row(modifier = Modifier.padding(top = 20.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.padding(top = 20.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             RadioButton(selected = name == "RadioButton 1",
                 enabled = true,
-                onClick = { onItemSelected("RadioButton 1") }
-                , colors = RadioButtonDefaults.colors(
+                onClick = { onItemSelected("RadioButton 1") }, colors = RadioButtonDefaults.colors(
                     selectedColor = Color.Red,
                     unselectedColor = Color.Green,
                     disabledSelectedColor = Color.DarkGray,
-                    disabledUnselectedColor = Color.LightGray)
+                    disabledUnselectedColor = Color.LightGray
+                )
             )
 
             Text(text = "RadioButton 1")
 
         }
-        Row(modifier = Modifier.padding(top = 20.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.padding(top = 20.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             RadioButton(selected = name == "RadioButton 2",
                 enabled = true,
-                onClick = { onItemSelected("RadioButton 2") }
-                , colors = RadioButtonDefaults.colors(
+                onClick = { onItemSelected("RadioButton 2") }, colors = RadioButtonDefaults.colors(
                     selectedColor = Color.Red,
                     unselectedColor = Color.Green,
                     disabledSelectedColor = Color.DarkGray,
-                    disabledUnselectedColor = Color.LightGray)
+                    disabledUnselectedColor = Color.LightGray
+                )
             )
 
             Text(text = "RadioButton 2")
 
         }
-        Row(modifier = Modifier.padding(top = 20.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.padding(top = 20.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             RadioButton(selected = name == "RadioButton 3",
                 enabled = true,
-                onClick = { onItemSelected("RadioButton 3") }
-                , colors = RadioButtonDefaults.colors(
+                onClick = { onItemSelected("RadioButton 3") }, colors = RadioButtonDefaults.colors(
                     selectedColor = Color.Red,
                     unselectedColor = Color.Green,
                     disabledSelectedColor = Color.DarkGray,
-                    disabledUnselectedColor = Color.LightGray)
+                    disabledUnselectedColor = Color.LightGray
+                )
             )
 
             Text(text = "RadioButton 3")
@@ -236,13 +279,13 @@ fun myTriStatusCheckBox() {
         mutableStateOf(ToggleableState.Off)
     }
 
-        TriStateCheckbox(state = state, onClick = {
-            state= when (state) {
-                ToggleableState.On -> ToggleableState.Off
-                ToggleableState.Off -> ToggleableState.Indeterminate
-                ToggleableState.Indeterminate -> ToggleableState.On
-            }
-        })
+    TriStateCheckbox(state = state, onClick = {
+        state = when (state) {
+            ToggleableState.On -> ToggleableState.Off
+            ToggleableState.Off -> ToggleableState.Indeterminate
+            ToggleableState.Indeterminate -> ToggleableState.On
+        }
+    })
 }
 
 @Composable
@@ -261,7 +304,7 @@ fun myCheckBoxWithTextCompleted(checkboxInfo: CheckInfo) {
 }
 
 @Composable
-fun getCheckBoxOptions(titles : List<String>) : List<CheckInfo> {
+fun getCheckBoxOptions(titles: List<String>): List<CheckInfo> {
     return titles.map {
         var status by rememberSaveable() {
             mutableStateOf(false)
