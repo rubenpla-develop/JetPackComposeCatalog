@@ -107,7 +107,10 @@ class MainActivity : ComponentActivity() {
                         )
                     )
 
-                    Column(Modifier.fillMaxSize().background(Color.LightGray)) {
+                    Column(
+                        Modifier
+                            .fillMaxSize()
+                            .background(Color.LightGray)) {
                         /*Column(Modifier.fillMaxSize()) {
                             myCard()
                             myDivider()
@@ -126,7 +129,21 @@ class MainActivity : ComponentActivity() {
                                 Text(text = "Show Dialog")
                             }
 
-                            MyCustomAdvancedDialog(
+                            MyConfirmationDialog(showDialog = show, onDismiss = {
+                                show = false
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "Dialog dismiss pressed!!", Toast.LENGTH_SHORT
+                                ).show()
+                            }, {
+                                show = false
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "Dialog config OK!!!", Toast.LENGTH_SHORT
+                                ).show()
+                            })
+
+                            /*MyCustomAdvancedDialog(
                                 showDialog = show, onDismiss = {
                                     show = false
                                     Toast.makeText(
@@ -139,7 +156,7 @@ class MainActivity : ComponentActivity() {
                                         this@MainActivity,
                                         "Dialog config OK!!!", Toast.LENGTH_SHORT
                                     ).show()
-                                })
+                                })*/
                         }
                     }
                 }
@@ -314,7 +331,7 @@ fun myRadioButton() {
 }
 
 @Composable
-fun myRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
+fun MyRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.padding(top = 20.dp),
