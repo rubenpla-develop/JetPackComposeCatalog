@@ -107,7 +107,7 @@ class MainActivity : ComponentActivity() {
                         )
                     )
 
-                    Column(Modifier.fillMaxSize()) {
+                    Column(Modifier.fillMaxSize().background(Color.LightGray)) {
                         /*Column(Modifier.fillMaxSize()) {
                             myCard()
                             myDivider()
@@ -126,7 +126,7 @@ class MainActivity : ComponentActivity() {
                                 Text(text = "Show Dialog")
                             }
 
-                            MyCustomDialog(
+                            MyCustomAdvancedDialog(
                                 showDialog = show, onDismiss = {
                                     show = false
                                     Toast.makeText(
