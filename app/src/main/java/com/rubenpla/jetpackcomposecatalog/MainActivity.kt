@@ -185,8 +185,8 @@ fun GreetingPreview() {
             onCheckedChange = { status = it })
 
 
-        Column(Modifier.fillMaxSize()) {
-            /*Column(Modifier.fillMaxSize()) {
+        /*Column(Modifier.fillMaxSize()) {
+            *//*Column(Modifier.fillMaxSize()) {
                 myCard()
                 myDivider()
                 myBadgeBox()
@@ -194,12 +194,14 @@ fun GreetingPreview() {
                 myBasicSlider()
                 myAdvanceSlider()
                 myRangeSlider()
-            }*/
+            }*//*
 
             Column(Modifier.fillMaxSize()) {
                // myBasicDialog(context = this@MainActivity)
             }
-        }
+        }*/
+
+        simpleRecyclerView()
     }
 }
 
