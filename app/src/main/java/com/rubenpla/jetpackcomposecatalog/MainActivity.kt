@@ -94,7 +94,7 @@ class MainActivity : ComponentActivity() {
                         selected = status,
                         onCheckedChange = { status = it })*/
 
-                    var selected by rememberSaveable {
+/*                    var selected by rememberSaveable {
                         mutableStateOf("Radio Button 1")
                     }
 
@@ -111,7 +111,7 @@ class MainActivity : ComponentActivity() {
                         Modifier
                             .fillMaxSize()
                             .background(Color.LightGray)) {
-                        /*Column(Modifier.fillMaxSize()) {
+                        *//*Column(Modifier.fillMaxSize()) {
                             myCard()
                             myDivider()
                             myBadgeBox()
@@ -119,7 +119,7 @@ class MainActivity : ComponentActivity() {
                             myBasicSlider()
                             myAdvanceSlider()
                             myRangeSlider()
-                        }*/
+                        }*//*
 
                         var show by remember {
                             mutableStateOf(false)
@@ -143,7 +143,7 @@ class MainActivity : ComponentActivity() {
                                 ).show()
                             })
 
-                            /*MyCustomAdvancedDialog(
+                            *//*MyCustomAdvancedDialog(
                                 showDialog = show, onDismiss = {
                                     show = false
                                     Toast.makeText(
@@ -156,9 +156,11 @@ class MainActivity : ComponentActivity() {
                                         this@MainActivity,
                                         "Dialog config OK!!!", Toast.LENGTH_SHORT
                                     ).show()
-                                })*/
+                                })*//*
                         }
-                    }
+                    }*/
+
+                    SuperHeroRecyclerView()
                 }
             }
         }
@@ -201,7 +203,9 @@ fun GreetingPreview() {
             }
         }*/
 
-        simpleRecyclerView()
+      //  simpleRecyclerView()
+
+        SuperHeroRecyclerView()
     }
 }
 
