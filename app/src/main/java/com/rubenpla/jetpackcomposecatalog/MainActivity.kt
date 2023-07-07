@@ -74,6 +74,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rubenpla.jetpackcomposecatalog.model.CheckInfo
+import com.rubenpla.jetpackcomposecatalog.model.SuperHero
 import com.rubenpla.jetpackcomposecatalog.ui.theme.JetPackComposeCatalogTheme
 
 class MainActivity : ComponentActivity() {
@@ -160,7 +161,8 @@ class MainActivity : ComponentActivity() {
                         }
                     }*/
 
-                    SuperHeroRecyclerView()
+                    //SuperHeroGridView()
+                    SuperHeroWithSpecialsControlsView()
                 }
             }
         }
@@ -205,7 +207,14 @@ fun GreetingPreview() {
 
       //  simpleRecyclerView()
 
-        SuperHeroRecyclerView()
+       // SuperHeroRecyclerView()
+        //SuperHeroGridView()
+        SuperHeroWithSpecialsControlsView()
+/*        ItemConstraintHero(superHero = SuperHero("The witcher",
+            "Geralt de Rivia",
+            "CDProjekt Red",
+            photo = R.drawable.geralt),
+            onItemSelected = {} )*/
     }
 }
 
