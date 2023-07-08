@@ -2,6 +2,7 @@ package com.rubenpla.jetpackcomposecatalog
 
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -88,6 +90,27 @@ fun SuperHeroRecyclerView() {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun StickySuperHeroRecyclerView() {
+    val context = LocalContext.current
+    var list: Map<String, List<SuperHero>> = getSuperHeroes().groupBy { it.publisher }
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        list.forEach { (publisher, mySuperHero) ->
+
+            stickyHeader {
+                Text(text = publisher, fontSize = 18.sp, color = Color.LightGray)
+            }
+
+            items(mySuperHero) { superHeroItem ->
+                ItemHero(superHero = superHeroItem) {
+                    Toast.makeText(context, "${it.superHeroName} clicked!!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+}
+
 @Composable
 fun SuperHeroGridView() {
     //  LazyRow(content = { getSuperHeroes() })
@@ -139,7 +162,9 @@ fun SuperHeroWithSpecialsControlsView() {
                     rvState.animateScrollToItem(0)
                 }
             },
-                modifier = Modifier.align(Alignment.CenterHorizontally).background(Color.Transparent)) {
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .background(Color.Transparent)) {
 
                 Text(text = "Button")
             }
@@ -215,7 +240,7 @@ fun ItemConstraintHero(superHero: SuperHero, onItemSelected: (SuperHero) -> Unit
                 fontSize = 14.sp,
                 fontStyle = FontStyle.Italic,
                 modifier = Modifier
-                    .padding(top= 4.dp, start = 8.dp)
+                    .padding(top = 4.dp, start = 8.dp)
                     .constrainAs(heroName) {
                         top.linkTo(parent.top)
                         start.linkTo(parent.start)

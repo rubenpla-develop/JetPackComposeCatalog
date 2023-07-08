@@ -162,7 +162,8 @@ class MainActivity : ComponentActivity() {
                     }*/
 
                     //SuperHeroGridView()
-                    SuperHeroWithSpecialsControlsView()
+                    //SuperHeroWithSpecialsControlsView()
+                    StickySuperHeroRecyclerView()
                 }
             }
         }
