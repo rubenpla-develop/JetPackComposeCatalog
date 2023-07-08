@@ -163,7 +163,8 @@ class MainActivity : ComponentActivity() {
 
                     //SuperHeroGridView()
                     //SuperHeroWithSpecialsControlsView()
-                    StickySuperHeroRecyclerView()
+                    //StickySuperHeroRecyclerView()
+                    ScaffoldExample()
                 }
             }
         }
@@ -210,12 +211,13 @@ fun GreetingPreview() {
 
        // SuperHeroRecyclerView()
         //SuperHeroGridView()
-        SuperHeroWithSpecialsControlsView()
+        //SuperHeroWithSpecialsControlsView()
 /*        ItemConstraintHero(superHero = SuperHero("The witcher",
             "Geralt de Rivia",
             "CDProjekt Red",
             photo = R.drawable.geralt),
             onItemSelected = {} )*/
+        ScaffoldExample()
     }
 }
 
