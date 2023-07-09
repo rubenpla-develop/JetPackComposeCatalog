@@ -83,7 +83,7 @@ fun ScreenThree(navigationController: NavHostController) {
         ) {}
 
         Button(modifier = Modifier.padding(start = 16.dp, top = 16.dp), onClick = {
-            navigationController.navigate("ScreenFour/235")
+            navigationController.navigate(Routes.ScreenFour.createRoute(41))
         }) {
             Text(text = "Go to ScreenFour")
         }
@@ -91,7 +91,7 @@ fun ScreenThree(navigationController: NavHostController) {
 }
 
 @Composable
-fun ScreenFour(navigationController: NavHostController, name: Int) {
+fun ScreenFour(navigationController: NavHostController, age: Int) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -104,6 +104,31 @@ fun ScreenFour(navigationController: NavHostController, name: Int) {
                 "Princess Diana",
                 "DC",
                 R.drawable.wonder_woman
+            )
+        ) {}
+
+        Button(modifier = Modifier.padding(start = 16.dp, top = 16.dp), onClick = {
+            navigationController.navigate(Routes.ScreenFive.createRoute("Ruben"))
+        }) {
+            Text(text = "Argument value: $age,  Go to ScreenFive ")
+        }
+    }
+}
+
+@Composable
+fun ScreenFive(navigationController: NavHostController, name: String?) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.DarkGray)
+    ) {
+        ItemConstraintHero(
+            Modifier.align(alignment = Alignment.Center),
+            superHero = SuperHero(
+                "Thor",
+                "Thor",
+                "Marvel",
+                R.drawable.thor
             )
         ) {}
 

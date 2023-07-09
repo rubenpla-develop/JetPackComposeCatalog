@@ -168,7 +168,8 @@ class MainActivity : ComponentActivity() {
                     //StickySuperHeroRecyclerView()
                     //ScaffoldExample()
 
-                    val navigationController = rememberNavController()
+                    //NAVIGATION
+                    /*val navigationController = rememberNavController()
 
                     NavHost(
                         navController = navigationController,
@@ -177,18 +178,27 @@ class MainActivity : ComponentActivity() {
                         composable(Routes.ScreenOne.route) { ScreenOne(navigationController) }
                         composable(Routes.ScreenTwo.route) { ScreenTwo(navigationController) }
                         composable(Routes.ScreenThree.route) { ScreenThree(navigationController) }
-                        composable("${Routes.ScreenFour.route}/{name}",
-                            arguments = listOf(navArgument("name") {
+                        composable(
+                            Routes.ScreenFour.route,
+                            arguments = listOf(navArgument("age") {
                                 type = NavType.IntType
                             })
                         ) { backStackEntry ->
 
                             ScreenFour(
                                 navigationController,
-                                name = backStackEntry.arguments?.getInt("name") ?: 0
+                                age = backStackEntry.arguments?.getInt("age") ?: 0
                             )
                         }
-                    }
+                        composable(Routes.ScreenFive.route,
+                        arguments = listOf(navArgument("name") { defaultValue = "DefaultName" })
+                        ) { NavBackStackEntry ->
+                            ScreenFive(navigationController, NavBackStackEntry.arguments?.getString("name"))
+                        }
+                    }*/
+                    //NAVIGATION
+
+                    ColorAnimationSimple()
                 }
             }
         }
