@@ -103,7 +103,7 @@ fun StickySuperHeroRecyclerView() {
             }
 
             items(mySuperHero) { superHeroItem ->
-                ItemHero(superHero = superHeroItem) {
+                ItemConstraintHero(Modifier, superHero = superHeroItem) {
                     Toast.makeText(context, "${it.superHeroName} clicked!!", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -144,7 +144,7 @@ fun SuperHeroWithSpecialsControlsView() {
             .weight(1f)
             .fillMaxWidth()) {
             items(getSuperHeroes()) { superHeroItem ->
-                ItemConstraintHero(superHero = superHeroItem) {
+                ItemConstraintHero(Modifier, superHero = superHeroItem) {
                     Toast.makeText(context, "${it.superHeroName} clicked!!", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -209,10 +209,10 @@ fun ItemHero(superHero: SuperHero, onItemSelected: (SuperHero) -> Unit) {
 }
 
 @Composable
-fun ItemConstraintHero(superHero: SuperHero, onItemSelected: (SuperHero) -> Unit) {
+fun ItemConstraintHero(modifier : Modifier, superHero: SuperHero, onItemSelected: (SuperHero) -> Unit) {
     Card(
         border = BorderStroke(2.dp, Color.DarkGray),
-        modifier = Modifier
+        modifier = modifier
             .width(300.dp)
             .height(150.dp)
             .clickable { onItemSelected(superHero) }
