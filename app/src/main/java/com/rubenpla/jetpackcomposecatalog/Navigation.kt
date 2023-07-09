@@ -33,9 +33,9 @@ fun ScreenOne(navigationController: NavHostController) {
         ) {}
 
         Button(modifier = Modifier.padding(start = 16.dp, top = 16.dp), onClick = {
-            navigationController.navigate("ScreenTwo")
+            navigationController.navigate(Routes.ScreenTwo.route)
         }) {
-            Text(text = "Go to ScreenTwo")
+            Text(text = "Go to ${Routes.ScreenTwo.route}")
         }
     }
 }
@@ -58,9 +58,9 @@ fun ScreenTwo(navigationController: NavHostController) {
         ) {}
 
         Button(modifier = Modifier.padding(start = 16.dp, top = 16.dp), onClick = {
-            navigationController.navigate("ScreenThree")
+            navigationController.navigate(Routes.ScreenThree.route)
         }) {
-            Text(text = "Go to ScreenThree")
+            Text(text = "Go to ${Routes.ScreenThree.route}")
         }
     }
 }
@@ -83,9 +83,34 @@ fun ScreenThree(navigationController: NavHostController) {
         ) {}
 
         Button(modifier = Modifier.padding(start = 16.dp, top = 16.dp), onClick = {
-            navigationController.navigate("ScreenOne")
+            navigationController.navigate("ScreenFour/235")
         }) {
-            Text(text = "Come back to ScreenThree ")
+            Text(text = "Go to ScreenFour")
+        }
+    }
+}
+
+@Composable
+fun ScreenFour(navigationController: NavHostController, name: Int) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.DarkGray)
+    ) {
+        ItemConstraintHero(
+            Modifier.align(alignment = Alignment.Center),
+            superHero = SuperHero(
+                "Wonder Woman",
+                "Princess Diana",
+                "DC",
+                R.drawable.wonder_woman
+            )
+        ) {}
+
+        Button(modifier = Modifier.padding(start = 16.dp, top = 16.dp), onClick = {
+            navigationController.navigate(Routes.ScreenOne.route)
+        }) {
+            Text(text = "Argument value: $name,  Come back to ${Routes.ScreenOne.route} ")
         }
     }
 }

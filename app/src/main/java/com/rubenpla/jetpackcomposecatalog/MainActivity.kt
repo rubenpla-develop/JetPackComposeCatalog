@@ -71,9 +71,11 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.rubenpla.jetpackcomposecatalog.model.CheckInfo
 import com.rubenpla.jetpackcomposecatalog.ui.theme.JetPackComposeCatalogTheme
 
@@ -95,24 +97,24 @@ class MainActivity : ComponentActivity() {
                         selected = status,
                         onCheckedChange = { status = it })*/
 
-/*                    var selected by rememberSaveable {
-                        mutableStateOf("Radio Button 1")
-                    }
+                    /*                    var selected by rememberSaveable {
+                                            mutableStateOf("Radio Button 1")
+                                        }
 
-                    val myCheckBoxOptions = getCheckBoxOptions(
-                        titles = listOf(
-                            "CheckBox 1",
-                            "Checkbox 2",
-                            "CheckBox 3",
-                            "CheckBox 4"
-                        )
-                    )
+                                        val myCheckBoxOptions = getCheckBoxOptions(
+                                            titles = listOf(
+                                                "CheckBox 1",
+                                                "Checkbox 2",
+                                                "CheckBox 3",
+                                                "CheckBox 4"
+                                            )
+                                        )
 
-                    Column(
-                        Modifier
-                            .fillMaxSize()
-                            .background(Color.LightGray)) {
-                        *//*Column(Modifier.fillMaxSize()) {
+                                        Column(
+                                            Modifier
+                                                .fillMaxSize()
+                                                .background(Color.LightGray)) {
+                                            *//*Column(Modifier.fillMaxSize()) {
                             myCard()
                             myDivider()
                             myBadgeBox()
@@ -168,10 +170,24 @@ class MainActivity : ComponentActivity() {
 
                     val navigationController = rememberNavController()
 
-                    NavHost(navController = navigationController, startDestination = "ScreenOne") {
-                        composable("ScreenOne") { ScreenOne(navigationController) }
-                        composable("ScreenTwo") { ScreenTwo(navigationController) }
-                        composable("ScreenThree") { ScreenThree(navigationController) }
+                    NavHost(
+                        navController = navigationController,
+                        startDestination = Routes.ScreenOne.route
+                    ) {
+                        composable(Routes.ScreenOne.route) { ScreenOne(navigationController) }
+                        composable(Routes.ScreenTwo.route) { ScreenTwo(navigationController) }
+                        composable(Routes.ScreenThree.route) { ScreenThree(navigationController) }
+                        composable("${Routes.ScreenFour.route}/{name}",
+                            arguments = listOf(navArgument("name") {
+                                type = NavType.IntType
+                            })
+                        ) { backStackEntry ->
+
+                            ScreenFour(
+                                navigationController,
+                                name = backStackEntry.arguments?.getInt("name") ?: 0
+                            )
+                        }
                     }
                 }
             }
@@ -215,16 +231,16 @@ fun GreetingPreview() {
             }
         }*/
 
-      //  simpleRecyclerView()
+        //  simpleRecyclerView()
 
-       // SuperHeroRecyclerView()
+        // SuperHeroRecyclerView()
         //SuperHeroGridView()
         //SuperHeroWithSpecialsControlsView()
-/*        ItemConstraintHero(superHero = SuperHero("The witcher",
-            "Geralt de Rivia",
-            "CDProjekt Red",
-            photo = R.drawable.geralt),
-            onItemSelected = {} )*/
+        /*        ItemConstraintHero(superHero = SuperHero("The witcher",
+                    "Geralt de Rivia",
+                    "CDProjekt Red",
+                    photo = R.drawable.geralt),
+                    onItemSelected = {} )*/
         ScaffoldExample()
     }
 }
@@ -288,7 +304,7 @@ fun myDropDownMenu() {
     }
 
     DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-        desserts.forEach {dessert ->
+        desserts.forEach { dessert ->
             DropdownMenuItem(text = { Text(text = dessert) }, onClick = {
                 expanded = false
                 selectedOption = dessert
