@@ -199,7 +199,8 @@ class MainActivity : ComponentActivity() {
                     //NAVIGATION
 
                     //ColorAnimationSimple()
-                    SizeAnimation()
+                    //SizeAnimation()
+                    VisibilityAnimation()
                 }
             }
         }
