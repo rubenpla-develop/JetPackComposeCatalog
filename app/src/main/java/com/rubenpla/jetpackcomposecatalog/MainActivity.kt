@@ -200,7 +200,8 @@ class MainActivity : ComponentActivity() {
 
                     //ColorAnimationSimple()
                     //SizeAnimation()
-                    VisibilityAnimation()
+                    //VisibilityAnimation()
+                    CrossFadeExampleAnimation()
                 }
             }
         }
